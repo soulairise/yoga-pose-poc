@@ -1,0 +1,85 @@
+{
+  "video": "/Users/soulmat/AI 에이전트 과정/yoga-pose-poc/data/videos/cc02_squat_frontal_raise.webm",
+  "run_at": "RUN_A_default",
+  "model": "pose_landmarker_full.task",
+  "n_frames": 846,
+  "fps": 30.0,
+  "video_seconds": 28.2,
+  "elapsed_seconds": 14.66213083267212,
+  "realtime_factor": 1.92332208202378,
+  "side_used": "left",
+  "mean_confidence_by_side": {
+    "left": 0.9648215561471087,
+    "right": 0.6295453261516525
+  },
+  "params": {
+    "confidence_threshold": 0.5,
+    "confidence_field": "visibility",
+    "down_angle": 120.0,
+    "up_angle": 160.0,
+    "target_angle": 100.0,
+    "smooth_window": 5,
+    "min_frames_down": 3,
+    "side": "auto",
+    "rotate": 0
+  },
+  "stats": {
+    "n_frames": 846,
+    "n_excluded_frames": 0,
+    "excluded_ratio": 0.0,
+    "n_reps": 6,
+    "n_shallow": 0,
+    "open_rep_at_end": false
+  },
+  "reps": [
+    {
+      "index": 1,
+      "start_frame": 55,
+      "bottom_frame": 74,
+      "end_frame": 104,
+      "min_angle": 38.02588937447457,
+      "shallow": false
+    },
+    {
+      "index": 2,
+      "start_frame": 137,
+      "bottom_frame": 163,
+      "end_frame": 193,
+      "min_angle": 38.281086400532175,
+      "shallow": false
+    },
+    {
+      "index": 3,
+      "start_frame": 220,
+      "bottom_frame": 242,
+      "end_frame": 274,
+      "min_angle": 37.12068877680879,
+      "shallow": false
+    },
+    {
+      "index": 4,
+      "start_frame": 391,
+      "bottom_frame": 434,
+      "end_frame": 489,
+      "min_angle": 38.0204675082148,
+      "shallow": false
+    },
+    {
+      "index": 5,
+      "start_frame": 555,
+      "bottom_frame": 607,
+      "end_frame": 667,
+      "min_angle": 37.76622466787695,
+      "shallow": false
+    },
+    {
+      "index": 6,
+      "start_frame": 721,
+      "bottom_frame": 774,
+      "end_frame": 829,
+      "min_angle": 37.672546661610234,
+      "shallow": false
+    }
+  ],
+  "shallow_reps": []
+}

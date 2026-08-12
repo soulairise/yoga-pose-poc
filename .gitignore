@@ -1,0 +1,17 @@
+# 영상은 저장소에 올리지 않습니다.
+#  - 회원 영상: 개인정보
+#  - CC 영상: 재배포하지 않고 src/fetch_data.py 로 받게 합니다 (출처는 data/SOURCES.md)
+data/videos/*
+!data/videos/.gitkeep
+
+# 결과물 중 영상도 용량이 커서 제외 (필요한 것은 CSV·PNG·JSON)
+results/**/*.mp4
+
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+assets/*.task
+
+# OMC 런타임 아티팩트
+.omc/

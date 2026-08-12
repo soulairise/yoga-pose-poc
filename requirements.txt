@@ -1,0 +1,7 @@
+matplotlib==3.9.4
+mediapipe==1.0.0
+numpy==1.26.4
+opencv-python==4.11.0.86
+pandas==2.3.3
+torch==2.8.0
+ultralytics==8.4.118

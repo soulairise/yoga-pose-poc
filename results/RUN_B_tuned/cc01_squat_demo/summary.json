@@ -1,0 +1,53 @@
+{
+  "video": "data/videos/cc01_squat_demo.webm",
+  "run_at": "RUN_B_tuned",
+  "model": "pose_landmarker_full.task",
+  "n_frames": 213,
+  "fps": 30.0,
+  "video_seconds": 7.1,
+  "elapsed_seconds": 3.8639299869537354,
+  "realtime_factor": 1.837507414464705,
+  "side_used": "right",
+  "mean_confidence_by_side": {
+    "left": 0.8012348557115534,
+    "right": 0.9524328592983956
+  },
+  "params": {
+    "confidence_threshold": 0.5,
+    "confidence_field": "visibility",
+    "down_angle": 120.0,
+    "up_angle": 160.0,
+    "target_angle": 100.0,
+    "smooth_window": 5,
+    "min_frames_down": 3,
+    "side": "auto",
+    "rotate": 0
+  },
+  "stats": {
+    "n_frames": 213,
+    "n_excluded_frames": 0,
+    "excluded_ratio": 0.0,
+    "n_reps": 2,
+    "n_shallow": 0,
+    "open_rep_at_end": false
+  },
+  "reps": [
+    {
+      "index": 1,
+      "start_frame": 49,
+      "bottom_frame": 69,
+      "end_frame": 99,
+      "min_angle": 42.81781240324953,
+      "shallow": false
+    },
+    {
+      "index": 2,
+      "start_frame": 143,
+      "bottom_frame": 160,
+      "end_frame": 191,
+      "min_angle": 46.86631996601044,
+      "shallow": false
+    }
+  ],
+  "shallow_reps": []
+}

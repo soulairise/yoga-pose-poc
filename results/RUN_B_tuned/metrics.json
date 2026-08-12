@@ -1,0 +1,18 @@
+{
+  "n_videos": 3,
+  "total_reps_true": 11,
+  "matched_reps": 11,
+  "s1_rate": 1.0,
+  "s1_pass": true,
+  "precision": 0.0,
+  "recall": 0.0,
+  "f1": 0.0,
+  "s2_pass": null,
+  "s2_evaluable": false,
+  "n_shallow_true": 0,
+  "tp": 0,
+  "fp": 0,
+  "fn": 0,
+  "poc_seconds": 22.676104068756104,
+  "manual_seconds": 42.0
+}

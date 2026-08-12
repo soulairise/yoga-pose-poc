@@ -1,0 +1,7 @@
+# 모델을 돌리기 전에 사람이 손으로 적은 정답입니다. 결과를 본 뒤에 고치지 않았습니다.
+# 세는 방식: 영상을 실시간으로 한 번 보며 셈 (되감기 없음)
+# manual_seconds = 사람이 세는 데 걸린 시간(초) → '기존 방식'의 숫자
+video_id,reps_true,shallow_reps,manual_seconds,note
+cc01_squat_demo,2,,7,바벨 백스쿼트·후측면·실내 720p
+cc02_squat_frontal_raise,6,,28,케틀벨·측면·반복 많음
+cc03_single_leg_squat,3,,7,한쪽 다리 스쿼트·측면 원거리 ← 어려운 것
