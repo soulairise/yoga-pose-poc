@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#faf8f4" />
+    <meta name="description" content="요가 아사나 반복 판정 PoC — 문제 정의부터 검증과 한계까지. AIFFEL AI 에이전트 1기 Main Quest 2" />
+    <title>요가 아사나 반복 판정 PoC | Main Quest 2</title>
+    <meta property="og:title" content="요가 아사나 반복 판정 PoC" />
+    <meta property="og:description" content="업무에서 출발해 적용 지점을 찾고, 성공 기준을 먼저 적고, 만들어 확인한 결과" />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="./styles.css?v=1" />
+  </head>
+  <body>
+    <div class="ambient ambient-a" aria-hidden="true"></div>
+    <div class="ambient ambient-b" aria-hidden="true"></div>
+
+    <header class="deck-header">
+      <button class="brand" id="overviewButton" aria-label="전체 슬라이드 보기">
+        <span class="brand-mark">MQ2</span>
+        <span class="brand-copy">
+          <b>POSE / POC</b>
+          <small>요가 아사나 반복 판정</small>
+        </span>
+      </button>
+      <div class="chapter-pill" id="chapterPill">문제</div>
+      <div class="header-actions">
+        <button class="icon-button action-button" id="notesButton" aria-pressed="false" title="발표자 노트">🗒 대본</button>
+        <button class="icon-button" id="themeButton" title="밝은/어두운 테마">🌗</button>
+        <button class="icon-button" id="fullscreenButton" title="전체 화면">⛶</button>
+        <span class="counter"><b id="currentNumber">01</b><i>/</i><span id="totalNumber">15</span></span>
+      </div>
+    </header>
+
+    <main class="stage" id="stage">
+
+      <section class="slide active cover" data-chapter="문제" data-title="표지" aria-hidden="false">
+        <div class="eyebrow"><span>AIFFEL AI 에이전트 1기</span><span>MAIN QUEST 2</span></div>
+        <div class="cover-grid">
+          <div>
+            <p class="kicker">도구가 아니라 업무에서 출발했습니다</p>
+            <h1>요가 아사나<br /><em>반복 판정</em> PoC</h1>
+            <p class="lead">자세 추정 · 노트북 로컬 실행 · 회원 영상을 밖으로 보내지 않음</p>
+          </div>
+          <div class="figure hero-fig">
+            <img src="./img/overlay_cc01_bottom.png" alt="관절을 그린 화면. 무릎 각도 42.8도, 누적 반복 수가 함께 표시됨" />
+            <figcaption>관절별 신뢰도를 색으로 구분해 그린 화면. 초록은 임계값을 넘은 관절.</figcaption>
+          </div>
+        </div>
+        <div class="cover-footer">
+          <div><b>11</b><span>REPS VERIFIED</span></div>
+          <div><b>3</b><span>VIDEOS</span></div>
+          <div><b>1</b><span>FAILURE FOUND</span></div>
+        </div>
+        <aside class="speaker-note"><b>1분</b> PoC의 산출물은 작동하는 물건이 아니라 판단이라는 것부터 말하고 시작합니다.</aside>
+      </section>
+
+      <section class="slide" data-chapter="문제" data-title="병목" aria-hidden="true">
+        <div class="slide-no">01 / BOTTLENECK</div>
+        <div class="split">
+          <div>
+            <p class="kicker">업무 유형 · 검사와 판독</p>
+            <h2>병목은 <em>정확도가 아닙니다</em></h2>
+            <p class="big-copy">숙련 지도자 한 명의 판정 정확도를 도구가 넘기는 어렵습니다. 도입 근거를 정확도로 잡으면 대개 도입할 값이 없다는 결론이 나옵니다.</p>
+          </div>
+          <ul class="decision-list">
+            <li><b>동시</b><span>10~20명이 같이 하면 <strong>세는 일에 주의가 나뉘어</strong> 자세를 놓친다</span></li>
+            <li><b>지속</b><span>수업 후반으로 갈수록 <strong>판정이 느슨해진다</strong></span></li>
+            <li><b>부재</b><span>혼자 수련할 때는 <strong>봐 줄 사람이 아예 없다</strong></span></li>
+            <li><b>기록</b><span>"3회차가 얕았다"가 <strong>남지 않는다</strong></span></li>
+          </ul>
+        </div>
+        <aside class="speaker-note"><b>2분</b> 네 가지 모두 정확도와 무관합니다. 도입 근거가 어디에 있는지 못 박습니다.</aside>
+      </section>
+
+      <section class="slide" data-chapter="문제" data-title="요가의 함정 둘" aria-hidden="true">
+        <div class="slide-no">02 / TRAPS</div>
+        <h2>요가로 옮기면 걸리는 것 <em>둘</em></h2>
+        <div class="compare-panels">
+          <div class="compare-panel">
+            <span class="tag">함정 ①</span>
+            <h3>「정렬」은 유파마다 답이 다르다</h3>
+            <p>아쉬탕가·아헹가·빈야사가 같은 자세를 다르게 판정합니다. <b>판정 기준이 사람마다 다른 일은 학습시킬 정답도 채점할 방법도 없습니다.</b></p>
+            <code>해결 → "옳고 그름"이 아니라
+"측정 가능한 값"으로 좁힌다
+  ✕ 정렬이 맞는가
+  ○ 무릎 각도가 90°±15° 안인가</code>
+          </div>
+          <div class="versus">+</div>
+          <div class="compare-panel accent">
+            <span class="tag">함정 ②</span>
+            <h3>몸에 영향을 준다</h3>
+            <p>잘못된 교정 지시는 부상으로 이어집니다. <b>AI가 들어갈 자리는 최종 판정이 아니라 후보를 좁혀 사람에게 넘기는 앞단입니다.</b></p>
+            <code>해결 → 지시가 아니라 표시
+  ✕ "무릎을 더 굽히세요"
+  ○ "3·7회차가 목표에 못 미침"
+     → 지도자가 확인</code>
+          </div>
+        </div>
+        <aside class="speaker-note"><b>2분</b> 이 둘을 안 짚고 만들면 정답을 만들 수 없거나 위험한 도구가 됩니다.</aside>
+      </section>
+
+      <section class="slide" data-chapter="기준" data-title="성공 기준" aria-hidden="true">
+        <div class="slide-no">03 / CRITERIA</div>
+        <div class="myth">
+          <span class="myth-label">순서</span>
+          <p>성공 기준을 <b>만들기 전에</b> 적었습니다. 정답도 모델을 돌리기 전에 적었습니다.</p>
+        </div>
+        <h2>무엇이 되면 <em>구축할 값</em>이 있다고 볼 것인가</h2>
+        <ul class="decision-list">
+          <li><b>S1</b><span>반복 횟수가 사람이 센 것과 <strong>20회 중 18회 이상</strong> 일치한다</span></li>
+          <li><b>S2</b><span>목표 각도에 못 미친 회차를 표시한다 (<strong>F1 0.70 이상</strong>)</span></li>
+          <li><b>S3</b><span>영상 1건 처리가 <strong>영상 길이보다 짧다</strong></span></li>
+        </ul>
+        <div class="pair">
+          <div class="callout"><b>판정 항목은 둘만.</b> 무릎이 모이는가·등이 굽었는가는 이번에 판정하지 않습니다. 항목을 늘리면 <b>기준을 세울 자료가 없는 항목</b>이 생깁니다.</div>
+          <div class="bottom-line"><b>기준을 못 넘어도 성과입니다.</b> 넘으면 구축 대상이고, 못 넘으면 <b>그 이유</b>가 결과물입니다.</div>
+        </div>
+        <aside class="speaker-note"><b>2분</b> 결과를 본 뒤 정답을 정하면 채점이 성립하지 않는다는 점을 강조합니다.</aside>
+      </section>
+
+      <section class="slide" data-chapter="기준" data-title="후보 선정" aria-hidden="true">
+        <div class="slide-no">04 / CANDIDATES</div>
+        <h2>크기가 아니라 <em>종류</em>로 벌렸습니다</h2>
+        <div class="model-table">
+          <div class="mt-head"><span>후보</span><span>실행 위치</span><span>만들어진 목적</span><span>결과의 형태</span><span>라이선스</span></div>
+          <div class="win best"><span>MediaPipe Pose</span><span>노트북 온디바이스</span><span>자세 추정 전용</span><span>관절별 신뢰도</span><b>Apache 2.0</b></div>
+          <div class="bad"><span>YOLO11-pose</span><span>노트북 로컬</span><span>탐지 범용 기반</span><span>관절별 신뢰도</span><b>AGPL-3.0</b></div>
+          <div class="base"><span>기준선 — 지도자 눈</span><span>사람</span><span>—</span><span>말로 된 판정</span><b>—</b></div>
+        </div>
+        <div class="pair">
+          <div class="callout"><b>제외 조건을 점수와 섞지 않았습니다.</b> 클라우드 API는 <b>회원 영상 반출</b>로, YOLO-pose는 <b>AGPL</b>로 — 점수를 매기기 <b>전에</b> 걸러냈습니다.</div>
+          <div class="bottom-line">점수부터 매기면 <b>쓸 수 없는 후보가 1위</b>가 되고, "영상이 밖으로 나간다"는 사실이 <b>각주로 밀립니다.</b></div>
+        </div>
+        <aside class="speaker-note"><b>2분</b> 같은 후보라도 거르는 순서가 결론을 바꾼다는 것이 이 장의 요점입니다.</aside>
+      </section>
+
+      <section class="slide" data-chapter="방법" data-title="파이프라인" aria-hidden="true">
+        <div class="slide-no">05 / PIPELINE</div>
+        <h2>입력 → 처리 → 출력</h2>
+        <div class="quant-flow">
+          <article><b>01</b><h3>관절 좌표</h3><p>프레임마다 좌표와 <em>신뢰도</em>. 신뢰도를 못 넘은 관절로는 <em>각도를 계산하지 않음</em></p></article>
+          <i>→</i>
+          <article><b>02</b><h3>무릎 각도</h3><p>엉덩이·무릎·발목 세 점. <em>보이는 좌표</em>만 쓰고 추정된 깊이는 쓰지 않음</p></article>
+          <i>→</i>
+          <article><b>03</b><h3>반복 판정</h3><p>내려감·올라옴 각도를 <em>따로</em> 둠. 하나면 경계에서 <em>한 번이 여러 번</em>이 됨</p></article>
+        </div>
+        <div class="pair">
+          <div class="callout"><b>판정에 쓰는 값은 전부 인자입니다.</b> 코드에 숫자를 박지 않았습니다.</div>
+          <div class="bottom-line">중간 산출물을 <b>반올림 없이</b> CSV로 남기고, 실행 시각 폴더에 쌓아 <b>덮어쓰지 않습니다.</b></div>
+        </div>
+        <aside class="speaker-note"><b>2분</b> 각 단계 사이에 사람이 정해야 할 값이 있다는 것을 짚습니다.</aside>
+      </section>
+
+      <section class="slide" data-chapter="결과" data-title="정상 동작" aria-hidden="true">
+        <div class="slide-no">06 / WORKS</div>
+        <h2>두 다리 스쿼트 — <em>정답과 일치</em></h2>
+        <div class="figure wide">
+          <img src="./img/angle_plot_cc01.png" alt="무릎 각도 그래프. 두 번의 하강이 명확하고 최저 43도와 47도에서 반복이 표시됨" />
+          <figcaption>실선이 무릎 각도, 점선이 내려감·올라옴 경계, 굵은 선이 목표 각도. 점은 각 반복의 최저점.</figcaption>
+        </div>
+        <div class="bottom-line">사람이 센 <b>2회</b>, 도구가 센 <b>2회</b>. 최저 각도 43°·47°로 목표(100°)를 한참 밑돕니다.</div>
+        <aside class="speaker-note"><b>1분</b> 잘 되는 경우를 먼저 보여 주고 다음 장에서 뒤집습니다.</aside>
+      </section>
+
+      <section class="slide" data-chapter="결과" data-title="실패 사례" aria-hidden="true">
+        <div class="slide-no">07 / FAILURE</div>
+        <div class="myth">
+          <span class="myth-label">같은 코드 · 같은 모델 · 다른 동작</span>
+          <p><b>한쪽 다리 스쿼트에서 0회</b>가 나왔습니다. 정답은 3회입니다.</p>
+        </div>
+        <div class="figure wide">
+          <img src="./img/angle_plot_cc03_fail.png" alt="무릎 각도가 129도를 넘지 못해 올라옴 경계선 160도에 한 번도 닿지 않는 그래프" />
+          <figcaption>각도가 <b>up 160°</b> 선에 한 번도 닿지 않습니다. "올라왔다"가 성립하지 않아 반복이 세어지지 않았습니다.</figcaption>
+        </div>
+        <aside class="speaker-note"><b>2분</b> 원인을 바로 말하지 말고 다음 장에서 분해해 보여 줍니다.</aside>
+      </section>
+
+      <section class="slide" data-chapter="결과" data-title="원인 분해" aria-hidden="true">
+        <div class="slide-no">08 / ABLATION</div>
+        <h2>원인이 <em>둘</em>이었습니다</h2>
+        <div class="model-table">
+          <div class="mt-head"><span>다리 선택</span><span>down / up</span><span>결과</span><span>무엇이 문제였나</span><span></span></div>
+          <div class="bad"><span>auto (= left)</span><span>120 / 160 (기본)</span><span>—</span><span>둘 다 어긋남</span><b>0회</b></div>
+          <div class="bad"><span>auto (= left)</span><span>100 / 140</span><span>—</span><span>임계값만 고쳐서는 안 됨</span><b>0회</b></div>
+          <div class="bad"><span>right</span><span>120 / 160 (기본)</span><span>—</span><span>다리만 고쳐서도 안 됨</span><b>0회</b></div>
+          <div class="win best"><span><b>right</b></span><span><b>100 / 140</b></span><span>—</span><span>둘 다 고쳐야 잡힘</span><b>3회</b></div>
+        </div>
+        <div class="pair">
+          <div class="callout"><b>원인 ① 동작이 다르면 각도 범위가 다릅니다.</b> 한쪽 다리 스쿼트는 무릎이 <b>154°까지만</b> 펴집니다. 기본값 160°는 두 다리 스쿼트 기준입니다.</div>
+          <div class="bottom-line"><b>원인 ② 신뢰도가 높은 다리가 판정에 맞는 다리가 아니었습니다.</b> auto가 고른 왼다리는 신뢰도 0.996인데 <b>129°까지만</b> 펴집니다.</div>
+        </div>
+        <aside class="speaker-note"><b>3분</b> 이 표가 이 PoC의 핵심입니다. 하나만 고쳐서는 안 된다는 점을 반드시 짚습니다.</aside>
+      </section>
+
+      <section class="slide" data-chapter="결과" data-title="값이 재는 것" aria-hidden="true">
+        <div class="slide-no">09 / MEASURING WHAT</div>
+        <h2>값이 계산된다는 것은<br /><em>의도한 것을 재고 있다</em>는 뜻이 아닙니다</h2>
+        <div class="scenario-row">
+          <article>
+            <b>0.996</b>
+            <p>auto가 고른 <strong>왼다리</strong>의 신뢰도. 가장 잘 보이는 다리입니다.</p>
+            <small>그런데 61°~<strong>129°</strong> — 끝까지 펴지지 않아 판정에 쓸 수 없습니다</small>
+          </article>
+          <article>
+            <b>0.895</b>
+            <p>실제로 필요했던 <strong>오른다리</strong>의 신뢰도. 더 낮습니다.</p>
+            <small>60°~<strong>154°</strong> — 이쪽이 동작을 담고 있습니다</small>
+          </article>
+        </div>
+        <div class="warning-banner">
+          <b>신뢰도가 높다는 것은 "그 관절이 잘 보인다"는 뜻이지, "그 관절이 내가 재려는 것을 재고 있다"는 뜻이 아닙니다.</b>
+        </div>
+        <aside class="speaker-note"><b>2분</b> 자동 선택 기준이 판정 목적과 다를 수 있다는 일반화된 교훈으로 넘깁니다.</aside>
+      </section>
+
+      <section class="slide" data-chapter="결과" data-title="조용히 틀리지 않았다" aria-hidden="true">
+        <div class="slide-no">10 / LOUD FAILURE</div>
+        <h2>그런데 <em>조용히</em> 틀리지 않았습니다</h2>
+        <div class="code-card">
+          <div><span>출력</span><code>반복      : 0회</code></div>
+          <div><span>경고</span><code>마지막에 내려간 채로 영상이 끝났습니다</code><small>그 회차는 세지 않았습니다</small></div>
+        </div>
+        <div class="pair">
+          <div class="callout">그럴듯한 숫자를 내놓은 것이 아니라 <b>"못 셌다"가 드러나게</b> 실패했습니다.</div>
+          <div class="bottom-line">검사·판독 업무에서 가장 위험한 것은 <b>오류도 경고도 없이 그럴듯한 숫자가 나오는 것</b>입니다. 그 실패는 아니었습니다.</div>
+        </div>
+        <div class="figure wide">
+          <img src="./img/angle_plot_cc03_fixed.png" alt="임계값과 다리를 조정한 뒤 세 번의 반복이 정확히 표시된 그래프" />
+          <figcaption>다리와 임계값을 둘 다 고친 뒤 — 정답 <b>3회</b>와 일치.</figcaption>
+        </div>
+        <aside class="speaker-note"><b>2분</b> 실패의 질이 다르다는 점을 강조합니다.</aside>
+      </section>
+
+      <section class="slide" data-chapter="검증" data-title="검증 요약" aria-hidden="true">
+        <div class="slide-no">11 / VERDICT</div>
+        <h2>성공 기준 판정</h2>
+        <div class="model-table">
+          <div class="mt-head"><span>기준</span><span>목표</span><span>RUN A · 전체 동일값</span><span>RUN B · 동작별 조정</span><span></span></div>
+          <div class="bad"><span><b>S1</b> 반복 횟수 일치</span><span>90% (18/20)</span><span>72.7% (8/11) 미달</span><span>100% (11/11) 통과</span><b>✅</b></div>
+          <div class="base"><span><b>S2</b> 얕은 회차 F1</span><span>0.70</span><span>평가 불가</span><span>평가 불가</span><b>⚠️</b></div>
+          <div class="win"><span><b>S3</b> 처리 속도</span><span>실시간 초과</span><span>1.79~1.92배속</span><span>1.78~1.94배속</span><b>✅</b></div>
+        </div>
+        <div class="warning-banner">
+          <b>S2는 '미달'이 아니라 '평가 불가'입니다.</b> 검증 자료에 <b>얕은 회차가 하나도 없어</b> 판정할 대상 자체가 없었습니다.
+          목표 각도를 올리면 통과한 것처럼 보이지만, <b>임계값을 임의로 정한 뒤 만족했다고 적으면 그 채점표로는 아무것도 판단할 수 없습니다.</b>
+        </div>
+        <aside class="speaker-note"><b>3분</b> 미달과 평가 불가를 구분하는 것이 이 PoC의 정직함입니다.</aside>
+      </section>
+
+      <section class="slide" data-chapter="검증" data-title="기존 방식과 비교" aria-hidden="true">
+        <div class="slide-no">12 / VS BASELINE</div>
+        <h2>기준선과 나란히 놓기</h2>
+        <div class="model-table">
+          <div class="mt-head"><span>항목</span><span>기존 — 사람이 영상 보며 셈</span><span>PoC</span><span></span><span></span></div>
+          <div class="win"><span>총 소요</span><span>42초</span><span>23초</span><span></span><b>1.8×</b></div>
+          <div class="win"><span>회차별 기록</span><span>남지 않음</span><span>reps.csv로 남음</span><span></span><b>+</b></div>
+          <div class="win"><span>동시 처리</span><span>불가</span><span>영상 수만큼</span><span></span><b>+</b></div>
+          <div class="win"><span>후반부 일관성</span><span>떨어짐</span><span>일정</span><span></span><b>+</b></div>
+          <div class="bad"><span>다른 동작 대응</span><span>사람은 바로 적응</span><span>임계값을 다시 잡아야 함</span><span></span><b>−</b></div>
+        </div>
+        <div class="pair">
+          <div class="callout"><b>속도 이득 1.8배는 크지 않고, 애초에 도입 근거도 아니었습니다.</b> 병목은 일관성·지속 시간·동시 처리였습니다.</div>
+          <div class="bottom-line">값이 나오는 곳은 <b>기록이 남는다</b>와 <b>동시 처리가 된다</b>입니다. 반대로 <b>사람이 압도적으로 나은 칸</b>도 표에 그대로 남겼습니다.</div>
+        </div>
+        <aside class="speaker-note"><b>2분</b> 유리한 줄만 남기지 않았다는 점을 보여 줍니다.</aside>
+      </section>
+
+      <section class="slide" data-chapter="한계" data-title="한계와 다음 단계" aria-hidden="true">
+        <div class="slide-no">13 / LIMITS</div>
+        <h2>한계와 다음 단계</h2>
+        <div class="three-reasons">
+          <article>
+            <b>1순위</b>
+            <h3>얕은 회차 자료 만들기</h3>
+            <p>S2를 평가하려면 <em>대상이 있는 자료</em>가 필요합니다. 촬영 전에 몇 번째를 얕게 할지 적어 두면 그게 정답이 됩니다.</p>
+          </article>
+          <article>
+            <b>2순위</b>
+            <h3>여러 명 동시 처리</h3>
+            <p>지금은 <em>한 명</em>만 봅니다. 병목이 동시 처리인데 정작 여러 명을 못 봅니다. 겹칠 때 <em>누가 누구인지</em> 유지하는 문제가 새로 생깁니다.</p>
+          </article>
+          <article>
+            <b>3순위</b>
+            <h3>아사나별 임계값 표</h3>
+            <p>동작이 바뀌면 임계값을 다시 잡아야 합니다. <em>모델 교체로는 해결되지 않습니다.</em></p>
+          </article>
+        </div>
+        <div class="pair">
+          <div class="callout"><b>자료의 한계</b> — 직접 촬영본이 아니라 자유 라이선스 영상 3건입니다. 매트·수련복·맨발 같은 <b>요가 현장 조건은 반영되지 않았습니다.</b></div>
+          <div class="bottom-line"><b>못 잰 것</b> — 지도자 <b>두 사람의 판정 일치도</b>. 사람끼리의 일치도가 <b>도구 기준의 천장</b>이라 도입 결정에는 이 숫자가 필요합니다.</div>
+        </div>
+        <aside class="speaker-note"><b>3분</b> 한계를 아는 것도 성과라는 점으로 마무리합니다.</aside>
+      </section>
+
+      <section class="slide closing" data-chapter="한계" data-title="결론" aria-hidden="true">
+        <div class="slide-no">14 / CONCLUSION</div>
+        <p class="kicker">이 PoC가 내린 판단</p>
+        <h2>구축 대상인가 —<br /><em>조건부</em>입니다</h2>
+        <div class="closing-lines">
+          <p><span>된다</span>두 다리 스쿼트 계열 <b>단일 동작</b>으로 한정하면 구축 대상 (8/8회 일치)</p>
+          <p><span>먼저</span>여러 아사나로 넓히려면 <b>아사나별 임계값 표</b>부터</p>
+          <p><span>먼저</span>얕은 회차 판정까지 가려면 <b>대상이 든 자료</b>부터</p>
+          <p><span>남음</span>판정 항목을 좁히면 <b>노트북에서 도는 작은 모델로 충분</b>하다</p>
+        </div>
+        <div class="closing-question">
+          PoC의 산출물은 작동하는 물건이 아니라 판단입니다.<br />
+          <b>기준을 못 넘은 이유도 결과물입니다.</b>
+        </div>
+        <div class="repo-links">
+          <a href="https://github.com/soulairise/yoga-pose-poc">저장소 · github.com/soulairise/yoga-pose-poc</a>
+        </div>
+        <aside class="speaker-note"><b>1분</b> 저장소 주소를 띄우고 마칩니다.</aside>
+      </section>
+
+    </main>
+
+    <footer class="deck-footer">
+      <div class="progress"><i id="progressBar"></i></div>
+      <div class="footer-copy"><span id="slideTitle">표지</span><small>← → / SPACE 이동 · O 전체보기 · N 대본 · T 테마</small></div>
+      <div class="nav-buttons">
+        <button id="prevButton" aria-label="이전 슬라이드">←</button>
+        <button id="nextButton" aria-label="다음 슬라이드">→</button>
+      </div>
+    </footer>
+
+    <dialog class="overview" id="overviewDialog">
+      <div class="overview-head"><div><span>SLIDE MAP</span><h2>전체 보기</h2></div><button id="overviewClose" aria-label="전체 보기 닫기">×</button></div>
+      <div class="overview-grid" id="overviewGrid"></div>
+    </dialog>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
