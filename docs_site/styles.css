@@ -1167,3 +1167,6 @@ blockquote { margin: 28px 0 0; padding: 20px 24px; border: 1px solid var(--line)
 @media (max-width: 900px) {
   .figure.wide img, .hero-fig img { max-height: none; }
 }
+.slide.dense .figure.wide img { max-height: 30vh; }
+.slide.dense .code-card { padding: 12px 20px; }
+.slide.dense .figure figcaption { font-size: 12px; }
